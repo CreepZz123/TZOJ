@@ -1,0 +1,48 @@
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+using namespace std;
+struct mate{
+	string name;
+	int F,IQ;
+}a[100005];
+int cmpF(mate a, mate b){
+	if(a.F == b.F){
+		return a.name < b.name;
+	}else{
+		return a.F > b.F;
+	}
+}
+int cmpIQ(mate a, mate b){
+	if(a.IQ == b.IQ){
+		return a.name < b.name;
+	}else{
+		return a.IQ > b.IQ;
+	}
+}
+int main(){
+	int n;
+	while(cin >> n){
+		for(int i = 1;i <= n;i++){
+			cin >> a[i].name >> a[i].F >> a[i].IQ;
+		}
+		sort(a + 1,a + n + 1,cmpF);
+		for(int i = 1;i<=n;i++){
+			if(a[i - 1].F == a[i].F && a[i - 1].IQ == a[i].IQ && i < n){
+				cout << i - 1 << " " << a[i].name << " " << a[i].F << " " << a[i].IQ << endl;
+			}else{
+				cout << i << " " << a[i].name << " " << a[i].F << " " << a[i].IQ << endl;
+			}
+		}
+		cout << "\n";
+		sort(a + 1,a + n + 1,cmpIQ);
+		for(int i = 1;i<=n;i++){
+			if(a[i - 1].IQ == a[i].IQ && a[i - 1].F == a[i].F && i < n){
+				cout << i - 1 << " " << a[i].name << " " << a[i].F << " " << a[i].IQ << endl;
+			}else{
+				cout << i << " " << a[i].name << " " << a[i].F << " " << a[i].IQ << endl;
+			}
+		}
+	}
+
+}
